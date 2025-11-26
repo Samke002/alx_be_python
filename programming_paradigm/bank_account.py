@@ -1,34 +1,23 @@
-# main-0.py
+class BankAccount:
+    def __init__(self, initial_balance=0):
+        """Initialize the bank account with an optional initial balance."""
+        self.account_balance = initial_balance
 
-import sys
-from bank_account import BankAccount
+    def deposit(self, amount):
+        """Add the specified amount to the account balance."""
+        if amount > 0:
+            self.account_balance += amount
 
-def main():
-    # Example starting balance of $100
-    account = BankAccount(100)
+    def withdraw(self, amount):
+        """
+        Withdraw the specified amount if sufficient funds exist.
+        Returns True if successful, otherwise False.
+        """
+        if 0 < amount <= self.account_balance:
+            self.account_balance -= amount
+            return True
+        return False
 
-    if len(sys.argv) < 2:
-        print("Usage: python main-0.py <command>:<amount>")
-        print("Commands: deposit, withdraw, display")
-        sys.exit(1)
-
-    # Split command and optional amount
-    command, *params = sys.argv[1].split(':')
-    amount = float(params[0]) if params else None
-
-    # Handle commands
-    if command == "deposit" and amount is not None:
-        account.deposit(amount)
-        print(f"Deposited: ${amount}")
-    elif command == "withdraw" and amount is not None:
-        if account.withdraw(amount):
-            print(f"Withdrew: ${amount}")
-        else:
-            print("Insufficient funds.")
-    elif command == "display":
-        account.display_balance()
-    else:
-        print("Invalid command.")
-
-if __name__ == "__main__":
-    main()
+    def display_balance(self):
+        """Print the current balance in a user-friendly format."""
+        print(f"Current Balance: ${self.account_balance}")
