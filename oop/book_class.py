@@ -16,5 +16,3 @@ class Book:
     def __repr__(self):
         """Official representation: Recreate the Book instance."""
         return f"Book('{self.title}', '{self.author}', {self.year})"
-📄 main.py
-pytho
